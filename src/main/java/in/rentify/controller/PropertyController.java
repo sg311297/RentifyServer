@@ -1,5 +1,6 @@
 package in.rentify.controller;
 
+import in.rentify.model.ContactInfo;
 import in.rentify.model.Property;
 import in.rentify.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,13 @@ public class PropertyController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/getPropertyDetails/{pid}")  //done
+    @GetMapping("/getPropertyDetails/{pid}")  
     public ResponseEntity<Property> getPropertyDetails(@PathVariable Long pid) {
         Property property = propertyService.getPropertyDetails(pid);
         return ResponseEntity.ok(property);
     }
 
-    @GetMapping("/getAllProperties")    //done
+    @GetMapping("/getAllProperties")    
     public ResponseEntity<?> getAllProperties(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "8") int size,
@@ -46,26 +47,32 @@ public class PropertyController {
         }
     }
     
-    @GetMapping("/latest-properties")   //done
+    @GetMapping("/latest-properties")  
     public List<Property> getLatestProperties() {
         return propertyService.getLatestProperties();
     }
 
-    @GetMapping("/owner/{ownerId}") //done
+    @GetMapping("/owner/{ownerId}") 
     public ResponseEntity<List<Property>> getPropertiesByOwnerId(@PathVariable Long ownerId) {
         List<Property> properties = propertyService.getPropertiesByOwnerId(ownerId);
         return ResponseEntity.ok(properties);
     }
 
-    @DeleteMapping("/deleteProperty/{id}")   //done
+    @DeleteMapping("/deleteProperty/{id}")  
     public ResponseEntity<String> deleteProperty(@PathVariable Long id) {
         propertyService.deleteProperty(id);
         return ResponseEntity.ok("Property deleted successfully");
     }
 
-    @PutMapping("/updateProperty")  //done
+    @PutMapping("/updateProperty") 
     public ResponseEntity<Property> updateProperty(@RequestBody Property property) {
         Property updatedProperty = propertyService.updateProperty(property);
         return ResponseEntity.ok(updatedProperty);
+    }
+    
+    @PostMapping("/contactInfo") 
+    public ResponseEntity<ContactInfo> updateContactInfo(@RequestBody ContactInfo contactInfo) {
+        ContactInfo contact = propertyService.updateContactInfo(contactInfo);
+        return ResponseEntity.ok(contact);
     }
 }

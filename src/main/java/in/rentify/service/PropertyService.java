@@ -1,8 +1,10 @@
 package in.rentify.service;
 
 import in.rentify.dao.AdditionalDetailsRepository;
+import in.rentify.dao.ContactInfoRepository;
 import in.rentify.dao.PropertyRepository;
 import in.rentify.model.AdditionalDetails;
+import in.rentify.model.ContactInfo;
 import in.rentify.model.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,9 @@ public class PropertyService {
 
     @Autowired
     private AdditionalDetailsRepository additionalDetailsRepository;
+    
+    @Autowired
+    private ContactInfoRepository contactInfoRepository;
 
     public String createProperty(Property property) {
         propertyRepository.save(property);
@@ -83,5 +88,9 @@ public class PropertyService {
 
     public Property updateProperty(Property updatedProperty) {
         return propertyRepository.save(updatedProperty);
+    }
+    
+    public ContactInfo updateContactInfo(ContactInfo contactInfo) {
+			return contactInfoRepository.save(contactInfo);
     }
 }

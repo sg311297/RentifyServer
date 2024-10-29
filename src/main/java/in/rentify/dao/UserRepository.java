@@ -7,7 +7,7 @@ import in.rentify.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	//Check for existing email to aviod duplicacy
+	//Check for existing email to avoid duplicate
 	boolean existsByEmail(String email);
 	
 	// Get the user object based on the email 
